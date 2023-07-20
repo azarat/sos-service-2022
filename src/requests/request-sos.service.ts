@@ -77,11 +77,11 @@ class SosService {
     )
     const { text, type } = {
       WAITING_FOR_PAY: {
-        text: 'Оплатите пожалуйста',
+        text: 'Оплатіть будь ласка',
         type: SosService.SOS_WAITIG_FOR_PAY,
       },
       REJECTED: {
-        text: 'Менеджер отклонил ваш запрос',
+        text: 'Менеджер відхилив ваш запит',
         type: SosService.SOS_PAYED_REJECT,
       },
     }[status]
@@ -113,14 +113,14 @@ class SosService {
       await editMessagePay(messageIds, message)
       await requestDatabaseRepository.payRequest(order_id, StatusEnum.PAYED)
       await this.pushNotification(
-        'Оплата прошла успешно',
+        'Оплата пройшла успішно',
         user,
         SosService.SOS_PAYED_SUCCEEDED,
       )
     } else if (isSuccess) {
       await requestDatabaseRepository.payRequest(order_id, StatusEnum.ERROR)
       await this.pushNotification(
-        'Что-то пошло не так',
+        'Щось пішло не так',
         SosService.SOS_PAYED_ERROR,
         user,
       )
