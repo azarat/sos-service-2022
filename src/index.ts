@@ -15,7 +15,7 @@ const app = fastify({
 
 app.register(fastifyFormbody)
 
-app.get('/health', async () => 'Hello World')
+app.get(`/${config.apiEnv}/SosService/health`, async () => 'Hello World')
 app.register(swagger, {
   exposeRoute: true,
   routePrefix: '/docs',
@@ -27,7 +27,7 @@ app.register(swagger, {
     },
   },
 })
-app.register(sosController)
+app.register(sosController, { prefix: `/${config.apiEnv}/SosService` })
 app.setErrorHandler((err, req, res) => {
   app.log.error(err)
   const message = err.message

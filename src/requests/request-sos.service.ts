@@ -47,7 +47,7 @@ class SosService {
       _id,
       config.franchiseAmount,
       'DayDrive LLC',
-      `http://${config.apiHost}/pay`,
+      `https://${config.apiHost}/${config.apiEnv}/SosService/pay`,
     ).createPayment(privateKey)
 
     return { id: _id, name, phone, position, comment, vehicle, address, paymentLink }
